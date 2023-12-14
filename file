@@ -17,7 +17,7 @@ void main() {
 var obraz = 'assets/kot3.jpg';
 
 class GradienConteiner extends StatefulWidget {
-  const GradienConteiner({super.key});
+  const GradienConteiner({Key? key}) : super(key: key);
 
   @override
   _GradienConteinerState createState() => _GradienConteinerState();
@@ -25,17 +25,41 @@ class GradienConteiner extends StatefulWidget {
 
 class _GradienConteinerState extends State<GradienConteiner> {
   Color backgroundColor = Colors.grey; // Początkowy kolor tła
+  int counter = 0; // Początkowa wartość licznika
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: backgroundColor, // Ustawienie koloru tła dla całego widoku
       child: Column(
         children: [
           Row(
             children: [
               Container(
-                // ... reszta kodu bez zmian
-                color: backgroundColor, // Ustawienie koloru tła
+                child: Row(
+                  children: [
+                    Text(
+                      "KoCiA ",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFeatures: [FontFeature.enable('smcp')]),
+                    ),
+                    Text(
+                      "RuLeTkA",
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFeatures: [FontFeature.enable('smcp')]),
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                height: MediaQuery.of(context).size.height * 0.1,
+                color: Colors.yellow,
+                width: MediaQuery.of(context).size.width,
               ),
             ],
           ),
@@ -44,27 +68,126 @@ class _GradienConteinerState extends State<GradienConteiner> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.9,
-                color: backgroundColor, // Ustawienie koloru tła
-                // ... reszta kodu bez zmian
+                color: backgroundColor,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 40),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      child: Image.asset(obraz),
+                    ),
+                    Container(
+                      child: Row(children: [
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              backgroundColor = Colors.red;
+                              counter--; // Zmniejszenie licznika o 1
+                            });
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(left: 30, top: 30),
+                            width: 150,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            alignment: Alignment.center,
+                            child: Row(children: [
+                              Icon(
+                                Icons.arrow_back_rounded,
+                                color: Colors.green,
+                                size: 40,
+                              ),
+                              Text(
+                                "Prev",
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.black),
+                              )
+                            ]),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              backgroundColor = Colors.green;
+                              // Dodaj dowolne inne akcje po naciśnięciu "Next"
+                            });
+                          },
+                          child: Container(
+                            width: 150,
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(15)),
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(top: 30),
+                            child: Row(children: [
+                              Text(
+                                "   Next",
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.black),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_rounded,
+                                color: Colors.red,
+                                size: 40,
+                              )
+                            ]),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      child: TextButton(
                         onPressed: () {
                           setState(() {
-                            backgroundColor = Colors.red; // Zmiana koloru tła
-                          });
-                        },
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            backgroundColor = Colors.green; // Zmiana koloru tła
+                            backgroundColor = Colors.yellow;
+                            // Dodaj dowolne inne akcje po naciśnięciu "Losuj"
                           });
                         },
                         child: Container(
-                          // ... reszta kodu bez zmian
+                          margin: EdgeInsets.only(top: 30),
+                          width: 300,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.yellow,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          alignment: Alignment.center,
+                          child: Row(children: [
+                            Container(
+                              alignment: Alignment.center,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 40,
+                                  ),
+                                  Icon(
+                                    Icons.airline_stops_outlined,
+                                    color: Colors.black,
+                                    size: 40,
+                                  ),
+                                  Text(
+                                    "  LOSUJ  ",
+                                    style: TextStyle(
+                                        fontSize: 30, color: Colors.black),
+                                  ),
+                                  Icon(
+                                    Icons.airline_stops_outlined,
+                                    color: Colors.black,
+                                    size: 40,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ]),
                         ),
                       ),
-                    ],
-                  ),
-                  // ... reszta kodu bez zmian
+                    )
+                  ],
                 ),
               )
             ],
@@ -74,6 +197,3 @@ class _GradienConteinerState extends State<GradienConteiner> {
     );
   }
 }
-
-
-
