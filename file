@@ -1,12 +1,9 @@
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'dart:math';
 
 void main() {
   runApp(
-    const MaterialApp(
+    MaterialApp(
       home: Scaffold(
         body: GradienConteiner(),
       ),
@@ -24,13 +21,11 @@ class GradienConteiner extends StatefulWidget {
 }
 
 class _GradienConteinerState extends State<GradienConteiner> {
-  Color backgroundColor = Colors.grey; // Początkowy kolor tła
-  int counter = 0; // Początkowa wartość licznika
+  int currentIndex = 0; // Dodaj zmienną indeksu
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return Container(
-      color: backgroundColor, // Ustawienie koloru tła dla całego widoku
       child: Column(
         children: [
           Row(
@@ -68,7 +63,7 @@ class _GradienConteinerState extends State<GradienConteiner> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.9,
-                color: backgroundColor,
+                color: Colors.grey,
                 child: Column(
                   children: [
                     Container(
@@ -81,9 +76,9 @@ class _GradienConteinerState extends State<GradienConteiner> {
                       child: Row(children: [
                         TextButton(
                           onPressed: () {
+                            // Obsługa przycisku "Prev"
                             setState(() {
-                              backgroundColor = Colors.red;
-                              counter--; // Zmniejszenie licznika o 1
+                              currentIndex = max(0, currentIndex - 1);
                             });
                           },
                           child: Container(
@@ -111,9 +106,9 @@ class _GradienConteinerState extends State<GradienConteiner> {
                         ),
                         TextButton(
                           onPressed: () {
+                            // Obsługa przycisku "Next"
                             setState(() {
-                              backgroundColor = Colors.green;
-                              // Dodaj dowolne inne akcje po naciśnięciu "Next"
+                              currentIndex = min(2, currentIndex + 1);
                             });
                           },
                           child: Container(
@@ -142,12 +137,7 @@ class _GradienConteinerState extends State<GradienConteiner> {
                     ),
                     Container(
                       child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            backgroundColor = Colors.yellow;
-                            // Dodaj dowolne inne akcje po naciśnięciu "Losuj"
-                          });
-                        },
+                        onPressed: () {},
                         child: Container(
                           margin: EdgeInsets.only(top: 30),
                           width: 300,
