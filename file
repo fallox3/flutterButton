@@ -1,0 +1,79 @@
+
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'dart:math';
+
+void main() {
+  runApp(
+    const MaterialApp(
+      home: Scaffold(
+        body: GradienConteiner(),
+      ),
+    ),
+  );
+}
+
+var obraz = 'assets/kot3.jpg';
+
+class GradienConteiner extends StatefulWidget {
+  const GradienConteiner({super.key});
+
+  @override
+  _GradienConteinerState createState() => _GradienConteinerState();
+}
+
+class _GradienConteinerState extends State<GradienConteiner> {
+  Color backgroundColor = Colors.grey; // Początkowy kolor tła
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                // ... reszta kodu bez zmian
+                color: backgroundColor, // Ustawienie koloru tła
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.9,
+                color: backgroundColor, // Ustawienie koloru tła
+                // ... reszta kodu bez zmian
+                        onPressed: () {
+                          setState(() {
+                            backgroundColor = Colors.red; // Zmiana koloru tła
+                          });
+                        },
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            backgroundColor = Colors.green; // Zmiana koloru tła
+                          });
+                        },
+                        child: Container(
+                          // ... reszta kodu bez zmian
+                        ),
+                      ),
+                    ],
+                  ),
+                  // ... reszta kodu bez zmian
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
