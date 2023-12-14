@@ -1,11 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'dart:ui';
 
 void main() {
   runApp(
-    const MaterialApp(
+    MaterialApp(
       home: Scaffold(
         body: GradienConteiner(),
       ),
@@ -13,10 +12,15 @@ void main() {
   );
 }
 
-var obraz = 'assets/kot3.jpg';
+class GradienConteiner extends StatefulWidget {
+  const GradienConteiner({Key? key}) : super(key: key);
 
-class GradienConteiner extends StatelessWidget {
-  const GradienConteiner({super.key});
+  @override
+  _GradienConteinerState createState() => _GradienConteinerState();
+}
+
+class _GradienConteinerState extends State<GradienConteiner> {
+  int zmienna = 1; // Dodaj zmienną indeksu
 
   @override
   Widget build(context) {
@@ -65,12 +69,22 @@ class GradienConteiner extends StatelessWidget {
                       margin: EdgeInsets.only(top: 40),
                       width: MediaQuery.of(context).size.width * 0.8,
                       height: MediaQuery.of(context).size.height * 0.4,
-                      child: Image.asset(obraz),
+                      child: Image.asset('assets/kot$zmienna.jpg'),
                     ),
                     Container(
                       child: Row(children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Obsługa przycisku "Prev"
+                            setState(() {
+                              if (zmienna > 1)
+                                zmienna--;
+                              else {
+                                zmienna = 9;
+                                zmienna--;
+                              }
+                            });
+                          },
                           child: Container(
                             margin: EdgeInsets.only(left: 30, top: 30),
                             width: 150,
@@ -95,7 +109,16 @@ class GradienConteiner extends StatelessWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              if (zmienna >= 8) {
+                                zmienna = 0;
+                                zmienna++;
+                              } else {
+                                zmienna++;
+                              }
+                            });
+                          },
                           child: Container(
                             width: 150,
                             height: 60,
@@ -122,7 +145,11 @@ class GradienConteiner extends StatelessWidget {
                     ),
                     Container(
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            zmienna = Random().nextInt(8) + 1;
+                          });
+                        },
                         child: Container(
                           margin: EdgeInsets.only(top: 30),
                           width: 300,
